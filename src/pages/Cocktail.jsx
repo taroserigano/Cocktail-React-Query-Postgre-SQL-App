@@ -4,6 +4,7 @@ import axios from 'axios';
 import Wrapper from '../assets/wrappers/CocktailPage';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
+import { COCKTAIL_API_URL } from '../config';
 
 const singleCocktailUrl =
   'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
@@ -121,13 +122,23 @@ const Cocktail = () => {
       };
 
       // Save to your database
-      await axios.post('http://localhost:5000/api/cocktails', cocktailData);
+      await axios.post(COCKTAIL_API_URL, cocktailData);
       
       toast.success('Cocktail saved to your database!');
       setHasChanges(false);
     } catch (error) {
       console.error('Error saving cocktail:', error);
       toast.error('Failed to save cocktail. Make sure the backend server is running.');
+    }
+  };
+
+  const handleShare = async () => {
+    const url = window.location.href;
+    try {
+      await navigator.clipboard.writeText(url);
+      toast.success('Link copied to clipboard!');
+    } catch (error) {
+      toast.error('Failed to copy link');
     }
   };
 
@@ -157,13 +168,25 @@ const Cocktail = () => {
               editedData.name
             )}
           </h3>
-          <button 
-            onClick={handleSave} 
-            className={`btn ${hasChanges ? 'btn-success' : ''}`}
-            disabled={!hasChanges}
-          >
-            save
-          </button>
+          <div className='btn-group'>
+            <button onClick={handleShare} className='btn btn-share'>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M18 8C19.6569 8 21 6.65685 21 5C21 3.34315 19.6569 2 18 2C16.3431 2 15 3.34315 15 5C15 6.65685 16.3431 8 18 8Z" stroke="currentColor" strokeWidth="2"/>
+                <path d="M6 15C7.65685 15 9 13.6569 9 12C9 10.3431 7.65685 9 6 9C4.34315 9 3 10.3431 3 12C3 13.6569 4.34315 15 6 15Z" stroke="currentColor" strokeWidth="2"/>
+                <path d="M18 22C19.6569 22 21 20.6569 21 19C21 17.3431 19.6569 16 18 16C16.3431 16 15 17.3431 15 19C15 20.6569 16.3431 22 18 22Z" stroke="currentColor" strokeWidth="2"/>
+                <path d="M8.59 13.51L15.42 17.49" stroke="currentColor" strokeWidth="2"/>
+                <path d="M15.41 6.51L8.59 10.49" stroke="currentColor" strokeWidth="2"/>
+              </svg>
+              share
+            </button>
+            <button 
+              onClick={handleSave} 
+              className={`btn ${hasChanges ? 'btn-success' : ''}`}
+              disabled={!hasChanges}
+            >
+              save
+            </button>
+          </div>
         </header>
         <div className='drink'>
           <img src={image} alt={name} className='img' />
@@ -314,25 +337,26 @@ const StyledWrapper = styled.div`
     cursor: pointer;
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
-    transition: background 0.2s;
+    transition: all 0.3s ease;
     display: inline-block;
   }
 
   .editable-field:hover {
-    background: var(--grey-100);
-    outline: 1px dashed var(--grey-400);
+    background: rgba(168, 85, 247, 0.15);
+    outline: 1px dashed rgba(168, 85, 247, 0.5);
+    color: var(--grey-100);
   }
 
   .editable-title {
     cursor: pointer;
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
-    transition: background 0.2s;
+    transition: all 0.3s ease;
   }
 
   .editable-title:hover {
-    background: var(--grey-100);
-    outline: 1px dashed var(--grey-400);
+    background: rgba(168, 85, 247, 0.15);
+    outline: 1px dashed rgba(168, 85, 247, 0.5);
   }
 
   .title-input {
@@ -405,11 +429,32 @@ const StyledWrapper = styled.div`
     flex-wrap: wrap;
     gap: 1rem;
   }
+  
+  .btn-group {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .btn-share {
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.8) 0%, rgba(6, 182, 212, 0.8) 100%);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .btn-share:hover {
+    box-shadow: 0 0 40px rgba(14, 165, 233, 0.8);
+  }
 
   @media (max-width: 768px) {
     header {
       flex-direction: column;
       align-items: stretch;
+    }
+    
+    .btn-group {
+      flex-direction: column;
     }
   }
 `;

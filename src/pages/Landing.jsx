@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import axios from 'axios';
 import CocktailList from '../components/CocktailList';
 import SearchForm from '../components/SearchForm';
+import FilterBar from '../components/FilterBar';
+import { COCKTAIL_API_URL } from '../config';
 const cocktailSearchUrl =
   'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
-const API_URL = 'http://localhost:5000/api/cocktails';
+const API_URL = COCKTAIL_API_URL;
 
 import { useQuery } from '@tanstack/react-query';
 
@@ -65,14 +68,54 @@ export const loader =
     return { searchTerm };
   };
 
+import CocktailListSkeleton from '../components/CocktailListSkeleton';
+
 const Landing = () => {
   const { searchTerm } = useLoaderData();
-  const { data: drinks } = useQuery(searchCocktailsQuery(searchTerm));
+  const { data: drinks, isLoading } = useQuery(searchCocktailsQuery(searchTerm));
+  const [filters, setFilters] = useState({
+    alcoholic: 'all',
+    category: 'all',
+    favorites: false,
+  });
+
+  const handleFilterChange = (newFilters) => {
+    setFilters(newFilters);
+  };
+
+  // Apply filters to drinks
+  const filteredDrinks = drinks?.filter(drink => {
+    // Get the alcoholic status - handle both API and DB cocktails
+    const alcoholicStatus = drink.strAlcoholic || drink.info;
+    const category = drink.strCategory || drink.category;
+    const drinkId = drink.idDrink || drink.id;
+
+    // Filter by favorites
+    if (filters.favorites) {
+      const favorites = JSON.parse(localStorage.getItem('favoriteCocktails') || '[]');
+      if (!favorites.includes(drinkId)) {
+        return false;
+      }
+    }
+
+    // Filter by alcoholic type
+    if (filters.alcoholic !== 'all' && alcoholicStatus !== filters.alcoholic) {
+      return false;
+    }
+
+    // Filter by category
+    if (filters.category !== 'all' && category !== filters.category) {
+      return false;
+    }
+
+    return true;
+  });
 
   return (
     <>
       <SearchForm searchTerm={searchTerm} />
-      <CocktailList drinks={drinks} />
+      <FilterBar onFilterChange={handleFilterChange} />
+      {isLoading ? <CocktailListSkeleton /> : <CocktailList drinks={filteredDrinks} />}
     </>
   );
 };
