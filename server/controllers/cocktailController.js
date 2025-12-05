@@ -69,18 +69,48 @@ export const createCocktail = async (req, res) => {
   try {
     const { name, category, alcoholic, glass, instructions, image, ingredients } = req.body;
 
+    console.log('Creating cocktail:', { name, category, alcoholic, glass, ingredients });
+
+    // Validate required fields
+    if (!name || !category || !alcoholic || !glass || !instructions) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Missing required fields' 
+      });
+    }
+
+    // Validate ingredients
+    if (!ingredients || !Array.isArray(ingredients) || ingredients.length === 0) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'At least one ingredient is required' 
+      });
+    }
+
+    // Check if cocktail with this name already exists
+    const existingCocktail = await prisma.cocktail.findUnique({
+      where: { name: name.trim() }
+    });
+
+    if (existingCocktail) {
+      return res.status(409).json({ 
+        success: false, 
+        error: `A cocktail named "${name}" already exists. Please use a different name.` 
+      });
+    }
+
     // Create cocktail with ingredients
     const cocktail = await prisma.cocktail.create({
       data: {
-        name,
+        name: name.trim(),
         category,
         alcoholic,
         glass,
         instructions,
-        image,
+        image: image || 'https://www.thecocktaildb.com/images/media/drink/default.jpg',
         ingredients: {
           create: ingredients.map((ing) => ({
-            measure: ing.measure,
+            measure: ing.measure || '',
             ingredient: {
               connectOrCreate: {
                 where: { name: ing.name },
@@ -99,8 +129,19 @@ export const createCocktail = async (req, res) => {
       },
     });
 
+    console.log('Cocktail created successfully:', cocktail.id);
     res.status(201).json({ success: true, data: cocktail });
   } catch (error) {
+    console.error('Error creating cocktail:', error);
+    
+    // Handle Prisma unique constraint errors
+    if (error.code === 'P2002') {
+      return res.status(409).json({ 
+        success: false, 
+        error: 'A cocktail with this name already exists. Please use a different name.' 
+      });
+    }
+    
     res.status(500).json({ success: false, error: error.message });
   }
 };

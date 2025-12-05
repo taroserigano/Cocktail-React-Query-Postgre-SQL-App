@@ -4,10 +4,11 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import { COCKTAIL_API_URL } from '../config';
+import { useQueryClient } from '@tanstack/react-query';
 
 const API_URL = COCKTAIL_API_URL;
 
-export const action = async ({ request }) => {
+export const action = (queryClient) => async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   
@@ -29,10 +30,18 @@ export const action = async ({ request }) => {
   };
 
   try {
-    await axios.post(API_URL, cocktailData);
+    console.log('Submitting cocktail data:', cocktailData);
+    const response = await axios.post(API_URL, cocktailData);
+    console.log('Server response:', response.data);
+    // Invalidate all search queries to refresh the cocktail list
+    queryClient.invalidateQueries({ queryKey: ['search'] });
+    toast.success('Cocktail created successfully!');
     return redirect('/');
   } catch (error) {
-    return { error: error.message };
+    console.error('Error creating cocktail:', error);
+    const errorMessage = error.response?.data?.error || error.message;
+    toast.error(`Failed to create cocktail: ${errorMessage}`);
+    return { error: errorMessage };
   }
 };
 

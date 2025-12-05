@@ -4,6 +4,7 @@ import axios from 'axios';
 import Wrapper from '../assets/wrappers/CocktailPage';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
+import { useQueryClient } from '@tanstack/react-query';
 
 const API_URL = 'http://localhost:5000/api/cocktails';
 
@@ -19,6 +20,7 @@ export const loader = async ({ params }) => {
 const MyCocktail = () => {
   const { cocktail: initialCocktail } = useLoaderData();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [cocktail, setCocktail] = useState(initialCocktail);
   const [editingField, setEditingField] = useState(null);
   const [editedData, setEditedData] = useState({
@@ -38,10 +40,10 @@ const MyCocktail = () => {
     
     try {
       await axios.delete(`${API_URL}/${cocktail.id}`);
+      // Invalidate all search queries to refresh the cocktail list
+      queryClient.invalidateQueries({ queryKey: ['search'] });
       toast.success('Cocktail deleted successfully!');
-      setTimeout(() => {
-        navigate('/my-cocktails');
-      }, 500);
+      navigate('/');
     } catch (error) {
       console.error('Error deleting cocktail:', error);
       toast.error('Failed to delete cocktail');
