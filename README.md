@@ -11,6 +11,13 @@
 
 **A modern, full-stack cocktail discovery and management application with a stunning cyberpunk-inspired design.**
 
+<img width="3730" height="1847" alt="image" src="https://github.com/user-attachments/assets/fb3667b5-26f6-44ec-ae6f-60053cafcfac" />
+<img width="3742" height="1866" alt="image" src="https://github.com/user-attachments/assets/dc4fc88a-ef12-40b7-b01d-6b1ffca3a7d9" />
+
+<img width="3718" height="1863" alt="image" src="https://github.com/user-attachments/assets/6908fdc8-f12d-480d-be4b-d71bb0f173f0" />
+<img width="3743" height="1822" alt="image" src="https://github.com/user-attachments/assets/378e9f51-907b-467e-b107-234a645db07e" />
+
+
 [Features](#-features) • [Tech Stack](#-tech-stack) • [Getting Started](#-getting-started) • [Deployment](#-deployment) • [Screenshots](#-screenshots)
 
 </div>
