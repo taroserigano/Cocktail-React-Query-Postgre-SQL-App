@@ -1,4 +1,5 @@
-# 🍹 Mixmaster - Premium Cocktail Discovery & Management App
+# 🍹 Mixmaster - Premium Cocktail Discovery & Management App - Demo: https://cocktail-react-query-postgre-sql-app.onrender.com/
+
 
 <div align="center">
 
