@@ -1,5 +1,11 @@
 # 🍹 Mixmaster - Premium Cocktail Discovery & Management App - Demo: https://cocktail-react-query-postgre-sql-app.onrender.com/
 
+**Mixmaster is a modern, full-stack cocktail discovery platform that blends _⚛️ React_, _🧪 React Query_, and a _🗄️ PostgreSQL + Prisma_ backend with a cyberpunk-themed UI.**  
+It delivers a high-performance, hybrid data architecture that merges external recipe data from _🍸 TheCocktailDB_ with user-generated cocktails stored in a relational database.
+
+**The application showcases advanced front-end engineering, real-time server-state management, and cloud-powered microservices—including an _⚡ AWS Lambda_ + _📨 Amazon SES_ newsletter system deployed serverlessly for maximum scalability.**
+
+
 <div align="center">
 
 ![Mixmaster](https://img.shields.io/badge/Mixmaster-Cocktail%20App-a855f7?style=for-the-badge)
