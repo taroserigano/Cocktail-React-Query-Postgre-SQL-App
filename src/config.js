@@ -1,10 +1,10 @@
 // Environment configuration
 const getAPIUrl = () => {
-  // In production, API is served from same origin
+  // In production, API is served from same origin (backend serves frontend)
   if (import.meta.env.PROD) {
-    return '';
+    return ''; // Same origin - backend serves the static files
   }
-  // In development, use localhost
+  // In development, use localhost backend
   return 'http://localhost:5000';
 };
 
