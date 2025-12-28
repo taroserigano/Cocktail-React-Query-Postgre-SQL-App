@@ -1,8 +1,10 @@
 import { Form, redirect, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
+import { COCKTAIL_API_URL } from '../config';
 
-const API_URL = 'http://localhost:5000/api/cocktails';
+const API_URL = COCKTAIL_API_URL;
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
@@ -26,10 +28,15 @@ export const action = async ({ request }) => {
   };
 
   try {
-    await axios.post(API_URL, cocktailData);
+    console.log('Creating cocktail:', cocktailData);
+    const response = await axios.post(API_URL, cocktailData);
+    console.log('Cocktail created successfully:', response.data);
+    toast.success('Cocktail created successfully!');
     return redirect('/my-cocktails');
   } catch (error) {
-    return { error: error.message };
+    console.error('Error creating cocktail:', error.response?.data || error.message);
+    toast.error(error.response?.data?.error || 'Failed to create cocktail');
+    return { error: error.response?.data?.error || error.message };
   }
 };
 

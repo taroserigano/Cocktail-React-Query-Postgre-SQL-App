@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 import axios from "axios";
 import CocktailList from "../components/CocktailList";
@@ -84,6 +84,33 @@ const Landing = () => {
     category: "all",
     favorites: false,
   });
+  const [favoritesSet, setFavoritesSet] = useState(() => {
+    const favArray = JSON.parse(
+      localStorage.getItem("favoriteCocktails") || "[]"
+    );
+    return new Set(favArray);
+  });
+
+  // Update favorites when localStorage changes
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const favArray = JSON.parse(
+        localStorage.getItem("favoriteCocktails") || "[]"
+      );
+      setFavoritesSet(new Set(favArray));
+    };
+
+    // Listen for storage events from other tabs
+    window.addEventListener("storage", handleStorageChange);
+
+    // Poll for changes in same tab (since storage event doesn't fire in same tab)
+    const interval = setInterval(handleStorageChange, 500);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      clearInterval(interval);
+    };
+  }, []);
 
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
@@ -93,11 +120,6 @@ const Landing = () => {
   const filteredDrinks = useMemo(() => {
     if (!drinks) return [];
 
-    // Get favorites once outside the filter loop
-    const favorites = filters.favorites
-      ? JSON.parse(localStorage.getItem("favoriteCocktails") || "[]")
-      : null;
-
     return drinks.filter((drink) => {
       // Get the alcoholic status - handle both API and DB cocktails
       const alcoholicStatus = drink.strAlcoholic || drink.info;
@@ -105,7 +127,7 @@ const Landing = () => {
       const drinkId = drink.idDrink || drink.id;
 
       // Filter by favorites
-      if (favorites && !favorites.includes(drinkId)) {
+      if (filters.favorites && !favoritesSet.has(drinkId)) {
         return false;
       }
 
@@ -124,7 +146,7 @@ const Landing = () => {
 
       return true;
     });
-  }, [drinks, filters]);
+  }, [drinks, filters, favoritesSet]);
 
   return (
     <>
@@ -133,7 +155,7 @@ const Landing = () => {
       {isLoading ? (
         <CocktailListSkeleton />
       ) : (
-        <CocktailList drinks={filteredDrinks} />
+        <CocktailList drinks={filteredDrinks} favorites={favoritesSet} />
       )}
     </>
   );

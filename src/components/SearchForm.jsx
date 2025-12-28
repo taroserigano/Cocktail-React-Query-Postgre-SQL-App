@@ -16,10 +16,10 @@ const SearchForm = ({ searchTerm }) => {
           clearTimeout(timeoutRef.current);
         }
 
-        // Set new timeout for debounce - reduced from 500ms to 300ms for faster response
+        // Set new timeout for debounce - 400ms for smoother typing
         timeoutRef.current = setTimeout(() => {
           formRef.current?.requestSubmit();
-        }, 300);
+        }, 400);
       }
     };
 

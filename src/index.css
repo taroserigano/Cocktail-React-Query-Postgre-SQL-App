@@ -32,7 +32,7 @@ html {
   --accent-500: #0ea5e9;
   --accent-600: #0284c7;
   --accent-700: #0369a1;
-  
+
   /* Neon glow colors */
   --neon-pink: #ff006e;
   --neon-blue: #00f5ff;
@@ -50,7 +50,7 @@ html {
   --grey-700: #404040;
   --grey-800: #262626;
   --grey-900: #171717;
-  
+
   /* Premium colors */
   --black: #000000;
   --white: #ffffff;
@@ -58,7 +58,7 @@ html {
   --red-dark: #dc2626;
   --green-light: #dcfce7;
   --green-dark: #16a34a;
-  
+
   /* Surface colors */
   --surface-dark: #1a1a1a;
   --surface-light: rgba(255, 255, 255, 0.05);
@@ -66,7 +66,7 @@ html {
 
   --small-text: 0.875rem;
   --extra-small-text: 0.7em;
-  
+
   /* Design tokens */
   --backgroundColor: #0a0a0a;
   --textColor: var(--grey-900);
@@ -86,14 +86,17 @@ html {
   --shadow-3: 0 8px 32px rgba(0, 0, 0, 0.12);
   --shadow-4: 0 16px 64px rgba(0, 0, 0, 0.16);
   --shadow-5: 0 24px 96px rgba(0, 0, 0, 0.24);
-  
+
   /* Neon glow effects */
-  --glow-purple: 0 0 30px rgba(168, 85, 247, 0.6), 0 0 60px rgba(168, 85, 247, 0.3);
-  --glow-blue: 0 0 30px rgba(14, 165, 233, 0.6), 0 0 60px rgba(14, 165, 233, 0.3);
+  --glow-purple: 0 0 30px rgba(168, 85, 247, 0.6),
+    0 0 60px rgba(168, 85, 247, 0.3);
+  --glow-blue: 0 0 30px rgba(14, 165, 233, 0.6),
+    0 0 60px rgba(14, 165, 233, 0.3);
   --glow-pink: 0 0 30px rgba(255, 0, 110, 0.6), 0 0 60px rgba(255, 0, 110, 0.3);
   --glow-soft: 0 0 20px rgba(168, 85, 247, 0.4);
-  --glow-strong: 0 0 40px rgba(168, 85, 247, 0.7), 0 0 80px rgba(168, 85, 247, 0.4);
-  
+  --glow-strong: 0 0 40px rgba(168, 85, 247, 0.7),
+    0 0 80px rgba(168, 85, 247, 0.4);
+
   /* Glass effects */
   --glass-bg: rgba(255, 255, 255, 0.08);
   --glass-bg-strong: rgba(255, 255, 255, 0.12);
@@ -103,7 +106,7 @@ html {
 
 body {
   background: #0a0a0a;
-  font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
   font-weight: 400;
   line-height: 1.6;
   color: var(--grey-100);
@@ -115,89 +118,246 @@ body {
 }
 
 body::before {
-  content: '';
+  content: "";
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: 
-    radial-gradient(circle at 15% 25%, rgba(168, 85, 247, 0.9) 0%, transparent 8px),
-    radial-gradient(circle at 85% 15%, rgba(14, 165, 233, 0.8) 0%, transparent 5px),
-    radial-gradient(circle at 45% 65%, rgba(191, 0, 255, 0.7) 0%, transparent 6px),
-    radial-gradient(circle at 25% 85%, rgba(0, 245, 255, 0.8) 0%, transparent 7px),
-    radial-gradient(circle at 75% 45%, rgba(168, 85, 247, 0.7) 0%, transparent 4px),
-    radial-gradient(circle at 95% 75%, rgba(14, 165, 233, 0.6) 0%, transparent 9px),
-    radial-gradient(circle at 55% 20%, rgba(191, 0, 255, 0.6) 0%, transparent 5px),
-    radial-gradient(circle at 10% 55%, rgba(0, 245, 255, 0.7) 0%, transparent 6px),
-    radial-gradient(circle at 65% 90%, rgba(168, 85, 247, 0.8) 0%, transparent 7px),
-    radial-gradient(circle at 35% 40%, rgba(14, 165, 233, 0.6) 0%, transparent 4px),
-    radial-gradient(circle at 50% 10%, rgba(191, 0, 255, 0.7) 0%, transparent 5px),
-    radial-gradient(circle at 5% 45%, rgba(0, 245, 255, 0.6) 0%, transparent 4px),
-    radial-gradient(circle at 92% 35%, rgba(168, 85, 247, 0.7) 0%, transparent 6px),
-    radial-gradient(circle at 28% 60%, rgba(14, 165, 233, 0.6) 0%, transparent 5px),
-    radial-gradient(circle at 72% 18%, rgba(191, 0, 255, 0.8) 0%, transparent 8px),
-    radial-gradient(circle at 18% 72%, rgba(0, 245, 255, 0.7) 0%, transparent 5px),
-    radial-gradient(circle at 88% 88%, rgba(168, 85, 247, 0.6) 0%, transparent 4px),
-    radial-gradient(circle at 42% 32%, rgba(14, 165, 233, 0.7) 0%, transparent 6px),
-    radial-gradient(circle at 58% 78%, rgba(191, 0, 255, 0.6) 0%, transparent 5px),
-    radial-gradient(circle at 12% 12%, rgba(0, 245, 255, 0.8) 0%, transparent 7px);
+  background-image: radial-gradient(
+      circle at 15% 25%,
+      rgba(168, 85, 247, 0.9) 0%,
+      transparent 8px
+    ),
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(14, 165, 233, 0.8) 0%,
+      transparent 5px
+    ),
+    radial-gradient(
+      circle at 45% 65%,
+      rgba(191, 0, 255, 0.7) 0%,
+      transparent 6px
+    ),
+    radial-gradient(
+      circle at 25% 85%,
+      rgba(0, 245, 255, 0.8) 0%,
+      transparent 7px
+    ),
+    radial-gradient(
+      circle at 75% 45%,
+      rgba(168, 85, 247, 0.7) 0%,
+      transparent 4px
+    ),
+    radial-gradient(
+      circle at 95% 75%,
+      rgba(14, 165, 233, 0.6) 0%,
+      transparent 9px
+    ),
+    radial-gradient(
+      circle at 55% 20%,
+      rgba(191, 0, 255, 0.6) 0%,
+      transparent 5px
+    ),
+    radial-gradient(
+      circle at 10% 55%,
+      rgba(0, 245, 255, 0.7) 0%,
+      transparent 6px
+    ),
+    radial-gradient(
+      circle at 65% 90%,
+      rgba(168, 85, 247, 0.8) 0%,
+      transparent 7px
+    ),
+    radial-gradient(
+      circle at 35% 40%,
+      rgba(14, 165, 233, 0.6) 0%,
+      transparent 4px
+    ),
+    radial-gradient(
+      circle at 50% 10%,
+      rgba(191, 0, 255, 0.7) 0%,
+      transparent 5px
+    ),
+    radial-gradient(
+      circle at 5% 45%,
+      rgba(0, 245, 255, 0.6) 0%,
+      transparent 4px
+    ),
+    radial-gradient(
+      circle at 92% 35%,
+      rgba(168, 85, 247, 0.7) 0%,
+      transparent 6px
+    ),
+    radial-gradient(
+      circle at 28% 60%,
+      rgba(14, 165, 233, 0.6) 0%,
+      transparent 5px
+    ),
+    radial-gradient(
+      circle at 72% 18%,
+      rgba(191, 0, 255, 0.8) 0%,
+      transparent 8px
+    ),
+    radial-gradient(
+      circle at 18% 72%,
+      rgba(0, 245, 255, 0.7) 0%,
+      transparent 5px
+    ),
+    radial-gradient(
+      circle at 88% 88%,
+      rgba(168, 85, 247, 0.6) 0%,
+      transparent 4px
+    ),
+    radial-gradient(
+      circle at 42% 32%,
+      rgba(14, 165, 233, 0.7) 0%,
+      transparent 6px
+    ),
+    radial-gradient(
+      circle at 58% 78%,
+      rgba(191, 0, 255, 0.6) 0%,
+      transparent 5px
+    ),
+    radial-gradient(
+      circle at 12% 12%,
+      rgba(0, 245, 255, 0.8) 0%,
+      transparent 7px
+    );
   background-size: 100% 100%;
   animation: floatParticles 25s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
   opacity: 0.7;
+  will-change: transform;
 }
 
 body::after {
-  content: '';
+  content: "";
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: 
-    radial-gradient(circle at 70% 30%, rgba(168, 85, 247, 0.7) 0%, transparent 6px),
-    radial-gradient(circle at 20% 70%, rgba(14, 165, 233, 0.8) 0%, transparent 8px),
-    radial-gradient(circle at 90% 50%, rgba(191, 0, 255, 0.6) 0%, transparent 7px),
-    radial-gradient(circle at 40% 10%, rgba(0, 245, 255, 0.7) 0%, transparent 5px),
-    radial-gradient(circle at 50% 80%, rgba(168, 85, 247, 0.7) 0%, transparent 9px),
-    radial-gradient(circle at 80% 95%, rgba(14, 165, 233, 0.8) 0%, transparent 6px),
-    radial-gradient(circle at 30% 50%, rgba(191, 0, 255, 0.6) 0%, transparent 7px),
-    radial-gradient(circle at 60% 5%, rgba(0, 245, 255, 0.7) 0%, transparent 5px),
-    radial-gradient(circle at 8% 28%, rgba(168, 85, 247, 0.7) 0%, transparent 6px),
-    radial-gradient(circle at 98% 68%, rgba(14, 165, 233, 0.6) 0%, transparent 4px),
-    radial-gradient(circle at 38% 88%, rgba(191, 0, 255, 0.8) 0%, transparent 8px),
-    radial-gradient(circle at 68% 38%, rgba(0, 245, 255, 0.7) 0%, transparent 5px),
-    radial-gradient(circle at 82% 22%, rgba(168, 85, 247, 0.6) 0%, transparent 5px),
-    radial-gradient(circle at 22% 82%, rgba(14, 165, 233, 0.7) 0%, transparent 6px),
-    radial-gradient(circle at 52% 52%, rgba(191, 0, 255, 0.7) 0%, transparent 7px),
-    radial-gradient(circle at 15% 35%, rgba(0, 245, 255, 0.6) 0%, transparent 4px),
-    radial-gradient(circle at 85% 65%, rgba(168, 85, 247, 0.8) 0%, transparent 9px),
-    radial-gradient(circle at 48% 92%, rgba(14, 165, 233, 0.7) 0%, transparent 5px);
+  background-image: radial-gradient(
+      circle at 70% 30%,
+      rgba(168, 85, 247, 0.7) 0%,
+      transparent 6px
+    ),
+    radial-gradient(
+      circle at 20% 70%,
+      rgba(14, 165, 233, 0.8) 0%,
+      transparent 8px
+    ),
+    radial-gradient(
+      circle at 90% 50%,
+      rgba(191, 0, 255, 0.6) 0%,
+      transparent 7px
+    ),
+    radial-gradient(
+      circle at 40% 10%,
+      rgba(0, 245, 255, 0.7) 0%,
+      transparent 5px
+    ),
+    radial-gradient(
+      circle at 50% 80%,
+      rgba(168, 85, 247, 0.7) 0%,
+      transparent 9px
+    ),
+    radial-gradient(
+      circle at 80% 95%,
+      rgba(14, 165, 233, 0.8) 0%,
+      transparent 6px
+    ),
+    radial-gradient(
+      circle at 30% 50%,
+      rgba(191, 0, 255, 0.6) 0%,
+      transparent 7px
+    ),
+    radial-gradient(
+      circle at 60% 5%,
+      rgba(0, 245, 255, 0.7) 0%,
+      transparent 5px
+    ),
+    radial-gradient(
+      circle at 8% 28%,
+      rgba(168, 85, 247, 0.7) 0%,
+      transparent 6px
+    ),
+    radial-gradient(
+      circle at 98% 68%,
+      rgba(14, 165, 233, 0.6) 0%,
+      transparent 4px
+    ),
+    radial-gradient(
+      circle at 38% 88%,
+      rgba(191, 0, 255, 0.8) 0%,
+      transparent 8px
+    ),
+    radial-gradient(
+      circle at 68% 38%,
+      rgba(0, 245, 255, 0.7) 0%,
+      transparent 5px
+    ),
+    radial-gradient(
+      circle at 82% 22%,
+      rgba(168, 85, 247, 0.6) 0%,
+      transparent 5px
+    ),
+    radial-gradient(
+      circle at 22% 82%,
+      rgba(14, 165, 233, 0.7) 0%,
+      transparent 6px
+    ),
+    radial-gradient(
+      circle at 52% 52%,
+      rgba(191, 0, 255, 0.7) 0%,
+      transparent 7px
+    ),
+    radial-gradient(
+      circle at 15% 35%,
+      rgba(0, 245, 255, 0.6) 0%,
+      transparent 4px
+    ),
+    radial-gradient(
+      circle at 85% 65%,
+      rgba(168, 85, 247, 0.8) 0%,
+      transparent 9px
+    ),
+    radial-gradient(
+      circle at 48% 92%,
+      rgba(14, 165, 233, 0.7) 0%,
+      transparent 5px
+    );
   background-size: 100% 100%;
   animation: floatParticles 30s ease-in-out infinite reverse;
   pointer-events: none;
   z-index: 1;
   opacity: 0.5;
+  will-change: transform;
 }
 
 @keyframes floatParticles {
-  0%, 100% {
-    transform: translate(0, 0);
-    background-position: 0% 0%, 100% 0%, 50% 50%, 25% 75%, 75% 25%, 95% 75%, 55% 20%, 10% 55%, 65% 90%, 35% 40%;
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    background-position: 0% 0%, 100% 0%, 50% 50%, 25% 75%, 75% 25%, 95% 75%,
+      55% 20%, 10% 55%, 65% 90%, 35% 40%;
   }
   25% {
-    transform: translate(20px, -30px);
-    background-position: 5% 10%, 95% 15%, 55% 60%, 20% 80%, 80% 30%, 90% 80%, 50% 25%, 15% 50%, 70% 85%, 40% 35%;
+    transform: translate3d(20px, -30px, 0);
+    background-position: 5% 10%, 95% 15%, 55% 60%, 20% 80%, 80% 30%, 90% 80%,
+      50% 25%, 15% 50%, 70% 85%, 40% 35%;
   }
   50% {
-    transform: translate(-15px, 25px);
-    background-position: 10% 5%, 90% 10%, 60% 55%, 30% 85%, 70% 20%, 98% 70%, 60% 15%, 5% 60%, 60% 95%, 30% 45%;
+    transform: translate3d(-15px, 25px, 0);
+    background-position: 10% 5%, 90% 10%, 60% 55%, 30% 85%, 70% 20%, 98% 70%,
+      60% 15%, 5% 60%, 60% 95%, 30% 45%;
   }
   75% {
-    transform: translate(25px, 15px);
-    background-position: 20% 15%, 85% 20%, 40% 70%, 15% 90%, 85% 40%, 92% 65%, 58% 30%, 12% 48%, 68% 88%, 38% 38%;
+    transform: translate3d(25px, 15px, 0);
+    background-position: 20% 15%, 85% 20%, 40% 70%, 15% 90%, 85% 40%, 92% 65%,
+      58% 30%, 12% 48%, 68% 88%, 38% 38%;
   }
 }
 p {
@@ -209,14 +369,15 @@ h3,
 h4,
 h5 {
   margin: 0;
-  font-family: 'Orbitron', system-ui, sans-serif;
+  font-family: "Orbitron", system-ui, sans-serif;
   font-weight: 700;
   line-height: 1.2;
   text-transform: uppercase;
   letter-spacing: var(--letterSpacingWide);
 }
 
-h1, h2 {
+h1,
+h2 {
   background: linear-gradient(
     135deg,
     var(--neon-purple) 0%,
@@ -309,7 +470,11 @@ ul {
 .btn {
   cursor: pointer;
   color: var(--white);
-  background: linear-gradient(135deg, var(--primary-600) 0%, var(--accent-600) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--primary-600) 0%,
+    var(--accent-600) 100%
+  );
   border: 2px solid transparent;
   border-radius: var(--borderRadius);
   letter-spacing: var(--letterSpacingWide);
@@ -320,24 +485,33 @@ ul {
   display: inline-block;
   font-weight: 700;
   font-size: 0.875rem;
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   position: relative;
   overflow: hidden;
 }
 
 .btn::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
   transition: left 0.6s ease;
 }
 
 .btn:hover {
-  background: linear-gradient(135deg, var(--primary-500) 0%, var(--accent-500) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--primary-500) 0%,
+    var(--accent-500) 100%
+  );
   box-shadow: var(--glow-strong);
   transform: translateY(-3px) scale(1.02);
   border-color: var(--glass-border);
@@ -402,13 +576,18 @@ ul {
 }
 
 .form::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue), var(--neon-purple));
+  background: linear-gradient(
+    90deg,
+    var(--neon-purple),
+    var(--neon-blue),
+    var(--neon-purple)
+  );
   background-size: 200% auto;
   animation: shimmer 3s linear infinite;
 }
@@ -430,7 +609,7 @@ ul {
   transition: var(--transition-smooth);
   font-size: 1rem;
   color: var(--grey-100);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-weight: 500;
 }
 

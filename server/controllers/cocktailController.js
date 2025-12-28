@@ -69,13 +69,11 @@ export const createCocktail = async (req, res) => {
   try {
     const { name, category, alcoholic, glass, instructions, image, ingredients } = req.body;
 
-    console.log('Creating cocktail:', { name, category, alcoholic, glass, ingredients });
-
     // Validate required fields
     if (!name || !category || !alcoholic || !glass || !instructions) {
       return res.status(400).json({ 
         success: false, 
-        error: 'Missing required fields' 
+        error: 'Missing required fields: name, category, alcoholic, glass, instructions' 
       });
     }
 
@@ -87,22 +85,13 @@ export const createCocktail = async (req, res) => {
       });
     }
 
-    // Check if cocktail with this name already exists
-    const existingCocktail = await prisma.cocktail.findUnique({
-      where: { name: name.trim() }
-    });
-
-    if (existingCocktail) {
-      return res.status(409).json({ 
-        success: false, 
-        error: `A cocktail named "${name}" already exists. Please use a different name.` 
-      });
-    }
+    console.log('Creating cocktail:', { name, category, alcoholic, glass });
+    console.log('Ingredients:', ingredients);
 
     // Create cocktail with ingredients
     const cocktail = await prisma.cocktail.create({
       data: {
-        name: name.trim(),
+        name,
         category,
         alcoholic,
         glass,
@@ -134,11 +123,11 @@ export const createCocktail = async (req, res) => {
   } catch (error) {
     console.error('Error creating cocktail:', error);
     
-    // Handle Prisma unique constraint errors
+    // Handle unique constraint violation
     if (error.code === 'P2002') {
-      return res.status(409).json({ 
+      return res.status(400).json({ 
         success: false, 
-        error: 'A cocktail with this name already exists. Please use a different name.' 
+        error: `A cocktail with the name "${req.body.name}" already exists` 
       });
     }
     

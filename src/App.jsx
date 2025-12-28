@@ -63,9 +63,9 @@ const router = createBrowserRouter([
         element: <EditCocktail />,
       },
       {
-        path: 'my-cocktails',
+        path: "my-cocktails",
         element: <MyCocktails />,
-        action: myCocktailsAction(queryClient),
+        action: myCocktailsAction,
         errorElement: <SinglePageError />,
       },
       {
